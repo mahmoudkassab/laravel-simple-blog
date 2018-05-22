@@ -15,6 +15,14 @@ class CreateArticlesTable extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('title');
+            $table->longText('body');
+            $table->timestamp('published_at');
+            $table->unsignedInteger('author_id');
+            $table->foreign('author_id')
+                    ->references('id')
+                    ->on('users')
+                    ->onDelete('cascade');
             $table->timestamps();
         });
     }
