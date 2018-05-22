@@ -13,11 +13,11 @@
     </div>
 </div>
 @php
-    if(isset($article->published_at)) {
-        $dateTime = explode(" ", $article->published_at);
-        $date = $dateTime[0];
-        $time = $dateTime[1];
-    }
+        if(isset($article->published_at)) {
+            $dateTime = explode(" ", $article->published_at);
+            $date = $dateTime[0];
+            $time = $dateTime[1];
+        }
 @endphp
 <div class="form-group row">
     <label for="published_at" class="col-sm-2 col-form-label">Published At:</label>
@@ -25,7 +25,7 @@
         <input type="date" name="published_at_date" class="form-control" id="published_at" value="@if(isset($article->published_at)){{ date('Y-m-d', strtotime($date)) }}@else{{ date('Y-m-d') }}@endif" >
     </div>
     <div class="col-sm-5">
-        <input type="time" name="published_at_time" class="form-control" id="published_at" value="@if(isset($article->published_at)){{ date('h:i:s', strtotime($time)) }}@else{{ date('h:i:s') }}@endif" >
+        <input type="time" name="published_at_time" class="form-control" id="published_at" value="@if(isset($article->published_at)){{ date('H:i:s', strtotime($time)) }}@else{{ date('H:i:s') }}@endif" >
 
     </div>
 </div>
