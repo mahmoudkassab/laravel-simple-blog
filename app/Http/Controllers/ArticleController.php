@@ -91,7 +91,14 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $article = Article::findOrFail($id);
+        $article->title = $request->title;
+        $article->body = $request->body;
+        $published_at = $request->published_at_date . ' '. $request->published_at_time;
+        $article->published_at = $published_at;
+        $article->save();
+
+        return redirect('articles');
     }
 
     /**
