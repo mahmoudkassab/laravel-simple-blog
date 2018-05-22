@@ -33,7 +33,21 @@
     <label for="tags" class="col-sm-2 col-form-label">Tags:</label>
     <div class="col-sm-10">
         <select multiple class="form-control" name="tags[]" id="tag_list">
-                <option value="1" >tag 1</option>
+            @foreach($tags as $tag)
+                @php
+                    if(isset($article->tagList)){
+                        if(in_array($tag->id, $article->tagList->toArray())){
+                            $selected = 'selected';
+                        }
+                        else{
+                            $selected = '';
+                        }
+                    }else{
+                        $selected = '';
+                    }
+                @endphp
+                <option value="{{$tag->id}}" {{ $selected }} >{{ $tag->name }}</option>
+            @endforeach
         </select>
     </div>
 </div>
