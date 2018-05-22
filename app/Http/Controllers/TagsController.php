@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Tag;
 
 class TagsController extends Controller
 {
-    
+
     public function show(Tag $tag)
     {
         $articles = $tag->articles()->where('published_at', '<', Carbon::now())->orderBy('created_at', 'desc')

@@ -19,3 +19,6 @@ Route::resource('articles', 'ArticleController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('tags/{tags}', 'TagsController@show')->name('tagShow');
+Route::get('tags', 'TagsController@showAllTags')->name('tagAll');

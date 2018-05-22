@@ -32,10 +32,13 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item {{ Request::is('articles') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{route('articles.index')}}">articles </a>
+                            <a class="nav-link" href="{{route('articles.index')}}">Articles </a>
                         </li>
                         <li class="nav-item {{ Request::is('articles/create') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('articles.create') }}">Create article</a>
+                        </li>
+                        <li class="nav-item {{ Request::is('tags') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('tagAll') }}">Article tags</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav">
