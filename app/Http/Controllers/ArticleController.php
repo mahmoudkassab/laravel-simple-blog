@@ -39,7 +39,15 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $article = new Article();
+        $article->title = $request->title;
+        $article->body = $request->body;
+        $published_at = $request->published_at_date . ' '. $request->published_at_time;
+        $article->published_at = $published_at;
+        $article->author_id = $request->user_id;
+        $article->save();
+
+        return redirect('articles');
     }
 
     /**
