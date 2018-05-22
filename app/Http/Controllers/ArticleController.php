@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Article;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
@@ -72,7 +73,13 @@ class ArticleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $article = Article::findOrFail($id);
+        $user = User::find($article->author_id);
+        if ($user->id == Auth::id()){
+            return view('articles.edit', compact('article'));
+        }else {
+            return redirect('articles');
+        }
     }
 
     /**
