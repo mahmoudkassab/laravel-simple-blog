@@ -101,7 +101,8 @@ class ArticleController extends Controller
         $article = Article::findOrFail($id);
         $user = User::find($article->author_id);
         if ($user->id == Auth::id()){
-            return view('articles.edit', compact('article'));
+            $tags = Tag::all();
+            return view('articles.edit', compact('article', 'tags'));
         }else {
             return redirect('articles');
         }
@@ -124,6 +125,21 @@ class ArticleController extends Controller
         $article->save();
 
         session()->flash('flash_message', 'the article has been Updated');
+
+        $tags = $request->tags;
+        foreach ($tags as $tag) {
+            if (is_numeric($tag))
+            {
+                $tagArr[] =  $tag;
+            }
+            else
+            {
+                $newTag = Tag::create(['name'=>$tag]);
+                $tagArr[] = $newTag->id;
+            }
+        }
+        $article->tags()->sync($tagArr);
+        
         return redirect('articles');
     }
 
