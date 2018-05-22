@@ -21,7 +21,7 @@
             <tr>
                 <td>{{ $article->id }}</td>
                 <td>
-                    <a href="#">{{ $article->title }}</a>
+                    <a href="{{ route('articles.show', $article->id) }}">{{ $article->title }}</a>
                 </td>
                 <td>{{ $article->body }}</td>
                 <td>{{ App\User::find($article->author_id)->name }}</td>

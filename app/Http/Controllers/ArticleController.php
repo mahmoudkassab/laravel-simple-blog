@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Article;
+use App\User;
 
 class ArticleController extends Controller
 {
@@ -58,7 +59,9 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        //
+        $article = Article::findOrFail($id);
+        $user = User::find($article->author_id);
+        return view('articles.show', compact('article', 'user'));
     }
 
     /**
