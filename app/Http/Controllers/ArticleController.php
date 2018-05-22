@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ArticleRequest;
+use App\Tag;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Article;
@@ -37,7 +38,8 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('articles.create');
+        $tags = Tag::all();
+        return view('articles.create', compact('tags'));
     }
 
     /**
@@ -58,6 +60,20 @@ class ArticleController extends Controller
 
         session()->flash('flash_message', 'the article has been created');
         session()->flash('flash_message_important', true);
+
+        $tags = $request->tags;
+        foreach ($tags as $tag) {
+            if (is_numeric($tag))
+            {
+                $tagArr[] =  $tag;
+            }
+            else
+            {
+                $newTag = Tag::create(['name'=>$tag]);
+                $tagArr[] = $newTag->id;
+            }
+        }
+        $article->tags()->sync($tagArr);
         return redirect('articles');
     }
 
