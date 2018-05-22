@@ -56,6 +56,8 @@ class ArticleController extends Controller
         $article->author_id = $request->user_id;
         $article->save();
 
+        session()->flash('flash_message', 'the article has been created');
+        session()->flash('flash_message_important', true);
         return redirect('articles');
     }
 
@@ -105,6 +107,7 @@ class ArticleController extends Controller
         $article->published_at = $published_at;
         $article->save();
 
+        session()->flash('flash_message', 'the article has been Updated');
         return redirect('articles');
     }
 
