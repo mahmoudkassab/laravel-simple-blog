@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Article;
 
 class ArticleController extends Controller
 {
@@ -13,7 +15,10 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return 'articles index';
+        $articles = Article::where('published_at', '<', Carbon::now())
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+        return view('articles.index', compact('articles'));
     }
 
     /**
