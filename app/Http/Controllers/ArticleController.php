@@ -84,9 +84,9 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        $article = Article::findOrFail($id);
+        $article = Article::whereSlug($slug)->firstOrFail();
         $user = User::find($article->author_id);
         return view('articles.show', compact('article', 'user'));
     }
