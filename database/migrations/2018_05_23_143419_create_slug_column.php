@@ -14,7 +14,7 @@ class CreateSlugColumn extends Migration
     public function up()
     {
         Schema::table('articles', function (Blueprint $table) {
-            //
+            $table->text('slug');
         });
     }
 
