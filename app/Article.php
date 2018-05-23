@@ -20,4 +20,8 @@ class Article extends Model
     {
         return $this->tags->pluck('id');
     }
+
+    public function comments(){
+        return $this->hasMany('App\Comment');
+    }
 }
