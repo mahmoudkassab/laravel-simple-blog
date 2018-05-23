@@ -56,6 +56,7 @@ class ArticleController extends Controller
         $published_at = $request->published_at_date . ' '. $request->published_at_time;
         $article->published_at = $published_at;
         $article->author_id = $request->user_id;
+        $article->slug = str_slug($request->title, '-');
         $article->save();
 
         session()->flash('flash_message', 'the article has been created');
@@ -122,6 +123,7 @@ class ArticleController extends Controller
         $article->body = $request->body;
         $published_at = $request->published_at_date . ' '. $request->published_at_time;
         $article->published_at = $published_at;
+        $article->slug = str_slug($request->title, '-');
         $article->save();
 
         session()->flash('flash_message', 'the article has been Updated');
