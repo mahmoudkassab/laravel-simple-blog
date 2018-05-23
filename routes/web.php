@@ -22,3 +22,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('tags/{tags}', 'TagsController@show')->name('tagShow');
 Route::get('tags', 'TagsController@showAllTags')->name('tagAll');
+
+Route::post('comments/{id}', 'CommentController@storeComment')->name('commentStore');
+Route::delete('comments/{id}', 'CommentController@deleteComment')->name('commentDelete');
